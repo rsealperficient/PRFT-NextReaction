@@ -8,6 +8,7 @@ export async function getAllParticipants() {
 			lastName: 'Smith',
 			firstName: 'Mike',
 			email: 'aaa@bbb.com',
+			skills: 'HTML/CSS, JavaScript, JSON, React, Node.js',
 		});
 
 		participants.push({
@@ -15,6 +16,7 @@ export async function getAllParticipants() {
 			lastName: 'Huff',
 			firstName: 'John',
 			email: 'def@ghj.com',
+			skills: 'JavaScript , C#, jQuery, Angular, NET Core, SQL',
 		});
 
 		return participants;

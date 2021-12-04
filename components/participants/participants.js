@@ -33,6 +33,7 @@ export default function Participants() {
 								lastName={x.lastName}
 								firstName={x.firstName}
 								email={x.email}
+								skills={x.skills}
 							/>
 						);
 					})}

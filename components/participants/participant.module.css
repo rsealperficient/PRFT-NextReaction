@@ -5,6 +5,13 @@
 	border-radius: 0.25rem;
 }
 
+.card:hover,
+.card:focus,
+.card:active {
+	color: #0070f3;
+	border-color: #0070f3;
+}
+
 .card .cardshadow {
 	border: none;
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
@@ -61,7 +68,7 @@
 	color: var(--color);
 }
 
-.btn .btnoutline:hover,
+/* .btn .btnoutline:hover,
 .btn .btn.btnoutline:focus {
 	background: hsl(200, 50%, 90%);
-}
+} */

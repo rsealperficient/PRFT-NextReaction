@@ -7,7 +7,7 @@ import {
 	Button,
 } from 'react-bootstrap';
 
-import { LoginStatus } from './loginStatus';
+import { LoginStatus } from './login-status';
 
 export default function NavBar() {
 	return (

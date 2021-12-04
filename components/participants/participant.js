@@ -16,7 +16,7 @@ function ImageWithFallback({ src, ...props }) {
 	return <img src={imgSrc} {...props} onError={onError} />;
 }
 
-export default function Participant({ lastName, firstName, email }) {
+export default function Participant({ lastName, firstName, email, skills }) {
 	const name = `${firstName}, ${lastName}`;
 
 	const cardClass = `${styles.card} ${styles.cardshadow}`;
@@ -29,9 +29,7 @@ export default function Participant({ lastName, firstName, email }) {
 			{/* <div className={imageCss}>
 				<ImageWithFallback src='1.jpg' />
 			</div> */}
-			<div className={styles.cardbody}>
-				lorem ipsum dolor sit am lorem
-			</div>
+			<div className={styles.cardbody}>{skills}</div>
 			<div className={styles.cardfooter}>
 				<button className={btnClass}>{email}</button>
 			</div>
