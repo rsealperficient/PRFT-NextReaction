@@ -1,6 +1,6 @@
-import NavBar from 'components/layout/navbar';
 import ReactPlaceHolder from 'react-placeholder';
 import { Alert, CardGroup } from 'react-bootstrap';
+import classes from "./participant.module.css";
 
 import useRequestRest, { REQUEST_STATUS } from 'hooks/useRequestRest';
 import Participant from './participant';
@@ -17,9 +17,7 @@ export default function Participants() {
 	}
 
 	return (
-		<>
-			<NavBar />
-			<CardGroup>
+			<div className="{classes.row}">
 				<ReactPlaceHolder
 					type='media'
 					rows={15}
@@ -27,16 +25,18 @@ export default function Participants() {
 				>
 					{participantsData.map((x) => {
 						return (
+							<div className={classes.column}>
 							<Participant
 								key={x.id}
 								lastName={x.lastName}
 								firstName={x.firstName}
 								email={x.email}
+								picture={x.picture}
 							/>
-						);
+							</div>
+						)
 					})}
 				</ReactPlaceHolder>
-			</CardGroup>
-		</>
-	);
-}
+			</div>
+	)}
+	

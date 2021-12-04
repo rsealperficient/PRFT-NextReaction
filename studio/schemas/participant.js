@@ -18,5 +18,10 @@ export default {
 			title: 'First Name',
 			type: 'string',
 		},
-	],
+        {
+			name: 'picture',
+			title: 'Picture',
+			type: 'image',
+		}
+  	],
 };

@@ -7,8 +7,8 @@ function MyApp({ Component, pageProps }) {
 	return (
 		<>
 			<Head>
-				<title>Conferences</title>
-				<meta name='description' content='Conferences' />
+				<title>Next Reaction</title>
+				<meta name='description' content='Hackathon' />
 				<meta
 					name='viewport'
 					content='initial-scale=1.0, width=device-width'

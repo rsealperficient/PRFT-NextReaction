@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Card, Button } from 'react-bootstrap';
+//import { Card, Button } from 'react-bootstrap';
+import Card from '../ui/Card';
+import classes from './participant.module.css';
+import { urlForImage } from '/lib/sanity'
 
 function ImageWithFallback({ src, ...props }) {
 	const [error, setError] = useState(false);
@@ -12,23 +15,22 @@ function ImageWithFallback({ src, ...props }) {
 		}
 	}
 
-	return <Card.Img src={imgSrc} {...props} onError={onError} />;
+	return <img src={imgSrc} {...props} onError={onError} />;
 }
 
-export default function Participant({ lastName, firstName, email }) {
+export default function Participant({ lastName, firstName, email, picture }) {
 	const title = `${firstName}, ${lastName}`;
-
 	return (
-		<Card style={{ width: '18rem' }}>
-			<ImageWithFallback variant='top' src='1.jpg' />
-			<Card.Body>
-				<Card.Title>{title}</Card.Title>
-				<Card.Text>
-					Some quick example text to build on the card title and make
-					up the bulk of the card's content.
-				</Card.Text>
-				<Button variant='light'>{email}</Button>
-			</Card.Body>
+		<Card>
+			<div className={classes.image}>
+				<ImageWithFallback variant='top' src={urlForImage(picture).url()} />
+			</div>
+			<div className={classes.content}>
+				<h3>{title}</h3>
+				<div className={classes.actions}>
+					<button>{email}</button>
+				</div>
+			</div>
 		</Card>
 	);
 }

@@ -2,12 +2,9 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from './home.module.css';
 
-import NavBar from 'components/layout/navbar';
-
 export default function Home() {
 	return (
 		<>
-			<NavBar />
 			<div className={styles.container}>
 				<Head>
 					<title>Create Next App</title>
