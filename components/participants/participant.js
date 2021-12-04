@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-//import { Card, Button } from 'react-bootstrap';
-import Card from '../ui/Card';
-import classes from './participant.module.css';
+import styles from './participant.module.css';
 import { urlForImage } from '/lib/sanity'
 
 function ImageWithFallback({ src, ...props }) {
@@ -18,19 +16,23 @@ function ImageWithFallback({ src, ...props }) {
 	return <img src={imgSrc} {...props} onError={onError} />;
 }
 
-export default function Participant({ lastName, firstName, email, picture }) {
-	const title = `${firstName}, ${lastName}`;
+export default function Participant({ lastName, firstName, email, skills,picture }) {
+	const name = `${firstName}, ${lastName}`;
+
+	const cardClass = `${styles.card} ${styles.cardshadow}`;
+	const btnClass = `${styles.btn}`;
+	const imageCss = `${styles.cardimage}`;
+
 	return (
-		<Card>
-			<div className={classes.image}>
+		<div className={cardClass}>
+			<div className={styles.cardheader}>{name}</div>
+			<div className={imageCss}>
 				<ImageWithFallback variant='top' src={urlForImage(picture).url()} />
 			</div>
-			<div className={classes.content}>
-				<h3>{title}</h3>
-				<div className={classes.actions}>
-					<button>{email}</button>
-				</div>
+			<div className={styles.cardbody}>{skills}</div>
+			<div className={styles.cardfooter}>
+				<button className={btnClass}>{email}</button>
 			</div>
-		</Card>
+		</div>
 	);
 }

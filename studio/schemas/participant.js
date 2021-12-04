@@ -18,6 +18,11 @@ export default {
 			title: 'First Name',
 			type: 'string',
 		},
+		{
+			name: 'skills',
+			title: 'Skills',
+			type: 'string',
+		},
         {
 			name: 'picture',
 			title: 'Picture',

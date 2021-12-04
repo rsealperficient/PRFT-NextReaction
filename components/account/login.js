@@ -19,7 +19,7 @@ export default function Login() {
 		setIsLoading(true);
 		try {
 			await login(emailRef.current.value, passwordRef.current.value);
-			router.push('/speakers');
+			router.push('/participants');
 		} catch (error) {
 			console.log(error);
 			setError('Failed to login');
