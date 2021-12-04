@@ -1,1 +1,3 @@
-export default function ParticipantAdd() {}
+export default function ParticipantAdd() {
+	return <div>ParticipantAdd</div>;
+}

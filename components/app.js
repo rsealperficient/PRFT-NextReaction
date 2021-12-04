@@ -9,6 +9,7 @@ import Login from 'components/account/login';
 import ForgotPassword from 'components/account/forgot-password';
 import Profile from 'components/account/profile';
 import Participants from 'components/participants/participants';
+import ParticipantAdd from 'components/participants/participant-add';
 
 const pageToShow = (pageName, props) => {
 	if (pageName === 'home') return <Home props={props} />;
@@ -17,6 +18,7 @@ const pageToShow = (pageName, props) => {
 	if (pageName === 'forgot-password') return <ForgotPassword props={props} />;
 	if (pageName === 'profile') return <Profile props={props} />;
 	if (pageName === 'participants') return <Participants props={props} />;
+	if (pageName === 'participant-add') return <ParticipantAdd props={props} />;
 	return <div>Not Found</div>;
 };
 
