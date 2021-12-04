@@ -6,7 +6,7 @@ import { useAuth } from 'contexts/AuthContext';
 
 export function LoginStatus() {
 	const router = useRouter();
-	const { currentUser, logout, firstName } = useAuth();
+	const { currentUser, logout, firstName, lastName } = useAuth();
 
 	async function handleLogout(e) {
 		await logout();
@@ -29,8 +29,10 @@ export function LoginStatus() {
 		);
 	}
 
+	const title = `${firstName}, ${lastName}`;
+
 	return (
-		<NavDropdown title={firstName}>
+		<NavDropdown title={title}>
 			<NavDropdown.Item href='/account/profile'>Profile</NavDropdown.Item>
 			<NavDropdown.Divider />
 			<NavDropdown.Item href='#' onClick={handleLogout}>

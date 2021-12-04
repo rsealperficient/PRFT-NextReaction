@@ -1,7 +1,7 @@
 import App from 'components/app';
 
 function index() {
-	return <App pageName='speakers' />;
+	return <App pageName='participants' />;
 }
 
 export default index;

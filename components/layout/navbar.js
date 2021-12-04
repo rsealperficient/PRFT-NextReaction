@@ -14,7 +14,7 @@ export default function NavBar() {
 	return (
 		<Navbar bg='light' expand='lg'>
 			<Container fluid>
-				<Navbar.Brand href='/home'>Perficient Hackathon</Navbar.Brand>
+				<Navbar.Brand href='/'>Perficient Hackathon</Navbar.Brand>
 				<Navbar.Toggle aria-controls='navbarScroll' />
 				<Navbar.Collapse id='navbarScroll'>
 					<Nav
@@ -22,8 +22,8 @@ export default function NavBar() {
 						style={{ maxHeight: '100px' }}
 						navbarScroll
 					>
-						<Nav.Link href='/home'>Home</Nav.Link>
-						<Nav.Link href='/speakers'>Speakers</Nav.Link>
+						<Nav.Link href='/'>Home</Nav.Link>
+						<Nav.Link href='/participants'>Participants</Nav.Link>
 						<LoginStatus />
 					</Nav>
 					<Form className='d-flex'>
