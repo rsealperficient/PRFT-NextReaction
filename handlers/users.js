@@ -1,9 +1,6 @@
-import {
-    auth,
-	createUserWithEmailAndPassword,
-} from '../firebase';
+import { auth, createUserWithEmailAndPassword } from '../firebase';
 
-import {client} from '../sanity';
+import { client } from '../sanity';
 
 export async function createUser(email, password, lastName, firstName) {
 	try {
@@ -15,16 +12,16 @@ export async function createUser(email, password, lastName, firstName) {
 		const userId = authResult.user.uid;
 		const token = authResult.user.getIdToken();
 
-        // const profile = {
-        //     _type: 'user',
-        //     id: userId,
-		// 	lastName: lastName,
-		// 	firstName: firstName,
-		// };
+		const profile = {
+			_type: 'user',
+			id: userId,
+			lastName: lastName,
+			firstName: firstName,
+		};
 
-        // const profileResult = await client.create(profile);
+		const profileResult = await client.create(profile);
 
-        //console.log(profileResult);
+		console.log(profileResult);
 
 		return {
 			userId: userId,

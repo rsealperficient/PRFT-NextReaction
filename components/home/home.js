@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from './home.module.css';
+import { useRouter } from 'next/router';
 import {
 	Navbar,
 	Nav,
@@ -11,12 +12,44 @@ import {
 	Button,
 } from 'react-bootstrap';
 
+import { useAuth } from 'contexts/AuthContext';
+
+export function LoginStatus() {
+	const router = useRouter();
+	const { currentUser, logout } = useAuth();
+
+	async function handleLogout(e) {
+		await logout();
+		router.push('/home');
+	}
+
+	if (
+		currentUser === null ||
+		typeof currentUser === 'undefined' ||
+		currentUser?.email === null
+	) {
+		return <Nav.Link href='/account/login'>Login</Nav.Link>;
+	}
+
+	return (
+		<NavDropdown title={currentUser.email}>
+			<NavDropdown.Item href='/account/profile'>Profile</NavDropdown.Item>
+			<NavDropdown.Divider />
+			<NavDropdown.Item href='#' onClick={handleLogout}>
+				Log Out
+			</NavDropdown.Item>
+		</NavDropdown>
+	);
+}
+
 export default function Home() {
 	return (
 		<>
 			<Navbar bg='light' expand='lg'>
 				<Container fluid>
-					<Navbar.Brand href='#'>Navbar scroll</Navbar.Brand>
+					<Navbar.Brand href='/home'>
+						Perficient Hackathon
+					</Navbar.Brand>
 					<Navbar.Toggle aria-controls='navbarScroll' />
 					<Navbar.Collapse id='navbarScroll'>
 						<Nav
@@ -24,23 +57,9 @@ export default function Home() {
 							style={{ maxHeight: '100px' }}
 							navbarScroll
 						>
-							<Nav.Link href='#action1'>Home</Nav.Link>
-							<Nav.Link href='#action2'>Link</Nav.Link>
-							<NavDropdown
-								title='Link'
-								id='navbarScrollingDropdown'
-							>
-								<NavDropdown.Item href='#action3'>
-									Action
-								</NavDropdown.Item>
-								<NavDropdown.Item href='#action4'>
-									Another action
-								</NavDropdown.Item>
-								<NavDropdown.Divider />
-								<NavDropdown.Item href='#action5'>
-									Something else here
-								</NavDropdown.Item>
-							</NavDropdown>
+							<Nav.Link href='/home'>Home</Nav.Link>
+							<Nav.Link href='/speakers'>Speakers</Nav.Link>
+							<LoginStatus />
 						</Nav>
 						<Form className='d-flex'>
 							<FormControl
