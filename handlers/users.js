@@ -35,3 +35,32 @@ export async function createUser(email, password, lastName, firstName) {
 		return { error: 'Failed to create an account' };
 	}
 }
+
+export async function getProfile(id) {
+	if (id === null) {
+		return { error: 'User has to be logged in' };
+	}
+
+	const data = await client.fetch(
+		`*[_type == "user" && id match '${id}']{lastName, firstName}`
+	);
+	return {
+		lastName: data[0].lastName,
+		firstName: data[0].firstName,
+	};
+}
+
+export async function updateProfile(id, lastName, firstName) {
+	const data = await client.fetch(`*[_type == "user" && id == '${id}']{_id}`);
+	const sanityId = data[0]._id;
+	client
+		.patch(sanityId)
+		.set({ lastName: lastName, firstName: firstName })
+		.commit()
+		.then((updated) => {
+			console.log('updated', updated);
+		})
+		.catch((err) => {
+			console.error(err);
+		});
+}

@@ -1,78 +1,13 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from './home.module.css';
-import { useRouter } from 'next/router';
-import {
-	Navbar,
-	Nav,
-	NavDropdown,
-	Container,
-	Form,
-	FormControl,
-	Button,
-} from 'react-bootstrap';
 
-import { useAuth } from 'contexts/AuthContext';
-
-export function LoginStatus() {
-	const router = useRouter();
-	const { currentUser, logout } = useAuth();
-
-	async function handleLogout(e) {
-		await logout();
-		router.push('/home');
-	}
-
-	if (
-		currentUser === null ||
-		typeof currentUser === 'undefined' ||
-		currentUser?.email === null
-	) {
-		return <Nav.Link href='/account/login'>Login</Nav.Link>;
-	}
-
-	return (
-		<NavDropdown title={currentUser.email}>
-			<NavDropdown.Item href='/account/profile'>Profile</NavDropdown.Item>
-			<NavDropdown.Divider />
-			<NavDropdown.Item href='#' onClick={handleLogout}>
-				Log Out
-			</NavDropdown.Item>
-		</NavDropdown>
-	);
-}
+import NavBar from 'components/layout/navbar';
 
 export default function Home() {
 	return (
 		<>
-			<Navbar bg='light' expand='lg'>
-				<Container fluid>
-					<Navbar.Brand href='/home'>
-						Perficient Hackathon
-					</Navbar.Brand>
-					<Navbar.Toggle aria-controls='navbarScroll' />
-					<Navbar.Collapse id='navbarScroll'>
-						<Nav
-							className='me-auto my-2 my-lg-0'
-							style={{ maxHeight: '100px' }}
-							navbarScroll
-						>
-							<Nav.Link href='/home'>Home</Nav.Link>
-							<Nav.Link href='/speakers'>Speakers</Nav.Link>
-							<LoginStatus />
-						</Nav>
-						<Form className='d-flex'>
-							<FormControl
-								type='search'
-								placeholder='Search'
-								className='me-2'
-								aria-label='Search'
-							/>
-							<Button variant='outline-success'>Search</Button>
-						</Form>
-					</Navbar.Collapse>
-				</Container>
-			</Navbar>
+			<NavBar />
 			<div className={styles.container}>
 				<Head>
 					<title>Create Next App</title>
@@ -139,24 +74,6 @@ export default function Home() {
 						</a>
 					</div>
 				</main>
-
-				<footer className={styles.footer}>
-					<a
-						href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
-						target='_blank'
-						rel='noopener noreferrer'
-					>
-						Powered by{' '}
-						<span className={styles.logo}>
-							<Image
-								src='/static/images/vercel.svg'
-								alt='Vercel Logo'
-								width={72}
-								height={16}
-							/>
-						</span>
-					</a>
-				</footer>
 			</div>
 		</>
 	);

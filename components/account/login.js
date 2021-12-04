@@ -64,7 +64,7 @@ export default function Login() {
 							</Button>
 						</Form>
 						<div className='w-100 text-center mt-3'>
-							<Link href='/forgot-password'>
+							<Link href='/account/forgot-password'>
 								Forgot Password?
 							</Link>
 						</div>
@@ -72,7 +72,7 @@ export default function Login() {
 				</Card>
 				<div className='w-100 text-center mt-2'>
 					Need an account?{' '}
-					<Link href='/signup'>
+					<Link href='/account/signup'>
 						<a>Sign Up</a>
 					</Link>
 				</div>

@@ -10,7 +10,7 @@ import {
 	updatePassword as fbUpdatePassword,
 } from '../firebase';
 
-import { createUser } from 'handlers/users';
+import { createUser, getProfile, updateProfile } from 'handlers/users';
 
 const AuthContext = createContext();
 
@@ -21,6 +21,8 @@ export function useAuth() {
 export function AuthProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [lastName, setLastName] = useState('');
+	const [firstName, setFirstName] = useState('');
 
 	function login(email, password) {
 		return signInWithEmailAndPassword(auth, email, password);
@@ -43,17 +45,29 @@ export function AuthProvider({ children }) {
 	}
 
 	useEffect(() => {
-
-		async function getToken(user){
-			if(user){	
+		async function getToken(user) {
+			if (user) {
 				const token = await user.getIdToken();
-			}			
+			}
+		}
+
+		async function getProfileData(user) {
+			if (!user) {
+				setLastName('');
+				setFirstName('');
+				return;
+			}
+
+			const profileData = await getProfile(user.uid);
+			setLastName(profileData.lastName);
+			setFirstName(profileData.firstName);
 		}
 
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			setCurrentUser(user);
 			setLoading(false);
-			getToken(user);			
+			getToken(user);
+			getProfileData(user);
 		});
 
 		return unsubscribe;
@@ -67,6 +81,9 @@ export function AuthProvider({ children }) {
 		resetPassword,
 		updateEmail,
 		updatePassword,
+		updateProfile,
+		lastName,
+		firstName,
 	};
 
 	return (

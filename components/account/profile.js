@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Container, Form, Button, Card, Alert } from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -6,13 +6,22 @@ import { useAuth } from 'contexts/AuthContext';
 
 export default function Profile() {
 	const router = useRouter();
-	const { currentUser, updatePassword, updateEmail } = useAuth();
+	const {
+		currentUser,
+		updatePassword,
+		updateEmail,
+		lastName,
+		firstName,
+		updateProfile,
+	} = useAuth();
 
 	if (currentUser === null) {
 		router.push('/account/login');
 		return <></>;
 	}
 
+	const lastNameRef = useRef();
+	const firstNameRef = useRef();
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const passwordConfirmRef = useRef();
@@ -35,6 +44,19 @@ export default function Profile() {
 		}
 		if (passwordRef.current.value) {
 			promises.push(updatePassword(passwordRef.current.value));
+		}
+
+		if (
+			lastNameRef.current.value !== lastName ||
+			firstNameRef.current.value !== firstName
+		) {
+			promises.push(
+				updateProfile(
+					currentUser.uid,
+					lastNameRef.current.value,
+					firstNameRef.current.value
+				)
+			);
 		}
 
 		Promise.all(promises)
@@ -67,6 +89,24 @@ export default function Profile() {
 									ref={emailRef}
 									required
 									defaultValue={currentUser.email}
+								/>
+							</Form.Group>
+							<Form.Group id='lastName'>
+								<Form.Label>Last Name</Form.Label>
+								<Form.Control
+									type='text'
+									defaultValue={lastName}
+									ref={lastNameRef}
+									required
+								/>
+							</Form.Group>
+							<Form.Group id='firstName'>
+								<Form.Label>First Name</Form.Label>
+								<Form.Control
+									type='text'
+									defaultValue={firstName}
+									ref={firstNameRef}
+									required
 								/>
 							</Form.Group>
 							<Form.Group id='password'>
