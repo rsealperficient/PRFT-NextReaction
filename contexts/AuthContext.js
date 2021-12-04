@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {
 	auth,
 	onAuthStateChanged,
@@ -13,6 +13,10 @@ import {
 import { createUser } from 'handlers/users';
 
 const AuthContext = createContext();
+
+export function useAuth() {
+	return useContext(AuthContext);
+}
 
 export function AuthProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState(null);
@@ -43,7 +47,6 @@ export function AuthProvider({ children }) {
 		async function getToken(user){
 			if(user){	
 				const token = await user.getIdToken();
-				console.log('token: ', token);
 			}			
 		}
 

@@ -1,10 +1,9 @@
 import {
-	db,
-	ref,
-	set,
-	auth,
+    auth,
 	createUserWithEmailAndPassword,
 } from '../firebase';
+
+import {client} from '../sanity';
 
 export async function createUser(email, password, lastName, firstName) {
 	try {
@@ -16,12 +15,16 @@ export async function createUser(email, password, lastName, firstName) {
 		const userId = authResult.user.uid;
 		const token = authResult.user.getIdToken();
 
-		const profile = {
-			lastName: lastName,
-			firstName: firstName,
-		};
+        // const profile = {
+        //     _type: 'user',
+        //     id: userId,
+		// 	lastName: lastName,
+		// 	firstName: firstName,
+		// };
 
-		await set(ref(db, 'users/' + userId), profile);
+        // const profileResult = await client.create(profile);
+
+        //console.log(profileResult);
 
 		return {
 			userId: userId,

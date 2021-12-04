@@ -11,6 +11,18 @@ import {
 	updatePassword,
 } from 'firebase/auth';
 
+
+import {
+	getFirestore,
+	collection,
+	getDocs,
+	setDoc,
+	getDoc,
+	updateDoc,
+	doc,
+	addDoc,
+} from 'firebase/firestore/lite'
+
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
 	authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,

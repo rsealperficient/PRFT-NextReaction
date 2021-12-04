@@ -1,8 +1,8 @@
 {
   "root": true,
   "api": {
-    "projectId": "",
-    "dataset": ""
+    "projectId": "4h6j8wvz",
+    "dataset": "production"
   },
   "project": {
     "name": "Perficient Hackathon",

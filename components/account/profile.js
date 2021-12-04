@@ -4,40 +4,49 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuth } from "contexts/AuthContext";
 
-export default function Signup() {
-  const { createUser } = useAuth();
+function Profile() {
+  const { currentUser, updatePassword, updateEmail } = useAuth();
 
-  const lastNameRef = useRef();
-  const firstNameRef = useRef();
+  if (currentUser === null) {
+    router.push("/account/login");
+    return <></>;
+  }
+
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Password don't match");
+      return setError("Passwords do not match");
     }
 
+    const promises = [];
+    setLoading(true);
     setError("");
-    setIsLoading(true);
-    const createUserResult = await createUser(
-      emailRef.current.value,
-      passwordRef.current.value,
-      lastNameRef.current.value,
-      firstNameRef.current.value
-    );
 
-    if (!createUserResult.error) {
-      router.push("/");
-    } else {
-      setError(createUserResult.error);
+    if (emailRef.current.value !== currentUser.email) {
+      promises.push(updateEmail(emailRef.current.value));
+    }
+    if (passwordRef.current.value) {
+      promises.push(updatePassword(passwordRef.current.value));
     }
 
-    setIsLoading(false);
+    Promise.all(promises)
+      .then(() => {
+        router.push("/");
+      })
+      .catch(() => {
+        setError("Failed to update account");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   return (
@@ -48,53 +57,46 @@ export default function Signup() {
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Card>
           <Card.Body>
-            <h2 className="text-center mb-4">Sign Up</h2>
+            <h2 className="text-center mb-4">Update Profile</h2>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSubmit}>
-              <Form.Group id="lastName">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control type="text" ref={lastNameRef} required />
-              </Form.Group>
-              <Form.Group id="firstName">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control type="text" ref={firstNameRef} required />
-              </Form.Group>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" ref={emailRef} required />
+                <Form.Control
+                  type="email"
+                  ref={emailRef}
+                  required
+                  defaultValue={currentUser.email}
+                />
               </Form.Group>
               <Form.Group id="password">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" ref={passwordRef} required />
+                <Form.Control
+                  type="password"
+                  ref={passwordRef}
+                  placeholder="Leave blank to keep the same"
+                />
               </Form.Group>
               <Form.Group id="password-confirm">
                 <Form.Label>Password Confirmation</Form.Label>
                 <Form.Control
                   type="password"
                   ref={passwordConfirmRef}
-                  required
+                  placeholder="Leave blank to keep the same"
                 />
               </Form.Group>
-              <Button
-                disabled={isLoading}
-                style={{ marginTop: "10px" }}
-                className="w-100"
-                type="submit"
-              >
-                Sign Up
+              <Button disabled={loading} className="w-100"  style={{ marginTop: "10px" }} type="submit">
+                Update
               </Button>
             </Form>
           </Card.Body>
         </Card>
         <div className="w-100 text-center mt-2">
-          Already have an account?{" "}
-          <Link href="/login">
-            <a>Log In</a>
-          </Link>
+          <Link href="/">Cancel</Link>
         </div>
       </div>
     </Container>
   );
 }
 
-
+export default Profile;
