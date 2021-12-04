@@ -8,6 +8,7 @@ import {
 } from 'react-bootstrap';
 
 import { LoginStatus } from './login-status';
+import { AddParticipantMenu } from './Add-Participant-Link';
 
 export default function NavBar() {
 	return (
@@ -22,7 +23,7 @@ export default function NavBar() {
 						navbarScroll
 					>
 						<Nav.Link href='/'>Home</Nav.Link>
-						<Nav.Link href='/participants'>Participants</Nav.Link>
+						<AddParticipantMenu/>
 						<LoginStatus />
 					</Nav>
 					<Form className='d-flex'>
