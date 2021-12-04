@@ -19,7 +19,6 @@ export default function Participants() {
 
 	return (
 		<>
-			<NavBar />
 			<div className={styles.cardgrid}>
 				<ReactPlaceHolder
 					type='media'
