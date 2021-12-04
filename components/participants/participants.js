@@ -4,6 +4,7 @@ import { Alert, CardGroup } from 'react-bootstrap';
 
 import useRequestRest, { REQUEST_STATUS } from 'hooks/useRequestRest';
 import Participant from './participant';
+import styles from './participants.module.css';
 
 export default function Participants() {
 	const { data: participantsData, requestStatus, error } = useRequestRest();
@@ -19,7 +20,7 @@ export default function Participants() {
 	return (
 		<>
 			<NavBar />
-			<CardGroup>
+			<div className={styles.cardgrid}>
 				<ReactPlaceHolder
 					type='media'
 					rows={15}
@@ -36,7 +37,7 @@ export default function Participants() {
 						);
 					})}
 				</ReactPlaceHolder>
-			</CardGroup>
+			</div>
 		</>
 	);
 }

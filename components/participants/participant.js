@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Button } from 'react-bootstrap';
+//import { Card, Button } from 'react-bootstrap';
+import styles from './participant.module.css';
 
 function ImageWithFallback({ src, ...props }) {
 	const [error, setError] = useState(false);
@@ -12,23 +13,28 @@ function ImageWithFallback({ src, ...props }) {
 		}
 	}
 
-	return <Card.Img src={imgSrc} {...props} onError={onError} />;
+	return <img src={imgSrc} {...props} onError={onError} />;
 }
 
 export default function Participant({ lastName, firstName, email }) {
-	const title = `${firstName}, ${lastName}`;
+	const name = `${firstName}, ${lastName}`;
+
+	const cardClass = `${styles.card} ${styles.cardshadow}`;
+	const btnClass = `${styles.btn}`;
+	const imageCss = `${styles.cardimage}`;
 
 	return (
-		<Card style={{ width: '18rem' }}>
-			<ImageWithFallback variant='top' src='1.jpg' />
-			<Card.Body>
-				<Card.Title>{title}</Card.Title>
-				<Card.Text>
-					Some quick example text to build on the card title and make
-					up the bulk of the card's content.
-				</Card.Text>
-				<Button variant='light'>{email}</Button>
-			</Card.Body>
-		</Card>
+		<div className={cardClass}>
+			<div className={styles.cardheader}>{name}</div>
+			{/* <div className={imageCss}>
+				<ImageWithFallback src='1.jpg' />
+			</div> */}
+			<div className={styles.cardbody}>
+				lorem ipsum dolor sit am lorem
+			</div>
+			<div className={styles.cardfooter}>
+				<button className={btnClass}>{email}</button>
+			</div>
+		</div>
 	);
 }
