@@ -10,7 +10,6 @@ export default async function handler(req, res) {
 			break;
 		}
 		case 'POST': {
-			console.log('participant - post', req.body);
 			if (req.body === null) {
 				return res.status(400).json({ body: 'Body must not be empty' });
 			}
@@ -27,6 +26,7 @@ export default async function handler(req, res) {
 			res.status(201).send(JSON.stringify(addResult, null, 2));
 			break;
 		}
+
 		default:
 			return res.status(405).end(`Method ${req.method} Not Allowed`);
 	}

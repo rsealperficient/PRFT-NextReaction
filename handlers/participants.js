@@ -5,10 +5,10 @@ export async function getAllParticipants() {
 	try {
 		let participants = [];
 		const data = await client.fetch(`*[_type == "participant"]`);
-
 		if (data.length > 0) {
 			for (let i = 0; i < data.length; i++) {
 				const item = {
+					_id: data[i]._id,
 					id: data[i].id,
 					lastName: data[i].lastName,
 					firstName: data[i].firstName,
@@ -41,8 +41,23 @@ export async function addParticipant(lastName, firstName, email, skills) {
 		.create(participant)
 		.then((result) => {
 			console.log('participant was created', result);
+			return result;
 		})
 		.catch((err) => {
 			console.error(err);
+			return null;
+		});
+}
+
+export async function deleteParticipant(id) {
+	client
+		.delete(id)
+		.then((result) => {
+			console.log('participant was deleted', result);
+			return true;
+		})
+		.catch((err) => {
+			console.error('Delete failed: ', err.message);
+			return false;
 		});
 };

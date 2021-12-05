@@ -9,22 +9,29 @@ export const REQUEST_STATUS = {
 
 const url = 'api/participants';
 
+function sleep(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function useRequestRest() {
 	const [data, setData] = useState([]);
 	const [requestStatus, setRequestStatus] = useState(REQUEST_STATUS.LOADING);
 	const [error, setError] = useState('');
 
-	useEffect(() => {
-		async function getAsync() {
-			try {
-				const result = await axios.get(url);
-				setRequestStatus(REQUEST_STATUS.SUCCESS);
-				setData(result.data);
-			} catch (e) {
-				setRequestStatus(REQUEST_STATUS.FAILURE);
-				setError(e);
-			}
+	async function getAsync() {
+		try {
+			await sleep(300);
+			const result = await axios.get(url);
+			console.log('result', result);
+			setRequestStatus(REQUEST_STATUS.SUCCESS);
+			setData(result.data);
+		} catch (e) {
+			setRequestStatus(REQUEST_STATUS.FAILURE);
+			setError(e);
 		}
+	}
+
+	useEffect(() => {
 		getAsync();
 	}, []);
 
@@ -52,28 +59,29 @@ function useRequestRest() {
 	//     updateAsync();
 	// }
 
-	// function deleteRecord(record, doneCallback) {
-	//     const originalRecords = [...data];
-	//     const newRecords = data.filter(function (rec) {
-	//         return rec.id != record.id;
-	//     });
-	//     async function delayFunction() {
-	//         try {
-	//             setData(newRecords);
-	//             await axios.delete(`${restUrl}/${record.id}`, record);
-	//             if (doneCallback) {
-	//                 doneCallback();
-	//             }
-	//         } catch (error) {
-	//             console.log('error thrown inside delayFunction', error);
-	//             if (doneCallback) {
-	//                 doneCallback();
-	//             }
-	//             setData(originalRecords);
-	//         }
-	//     }
-	//     delayFunction();
-	// }
+	async function deleteRecord(record, doneCallback) {
+		async function deleteAsync() {
+			try {
+				const result = await axios.delete(
+					`${url}/${record._id}`,
+					record
+				);
+				console.log('delete result', result);
+				await getAsync();
+
+				if (doneCallback) {
+					doneCallback();
+				}
+			} catch (error) {
+				console.log('error thrown inside deleteAsync', error);
+				if (doneCallback) {
+					doneCallback();
+				}
+			}
+		}
+
+		deleteAsync();
+	}
 
 	return {
 		data,
@@ -81,7 +89,8 @@ function useRequestRest() {
 		error,
 		// updateRecord,
 		// insertRecord,
-		// deleteRecord,
+		deleteRecord,
+		setData,
 	};
 }
 export default useRequestRest;

@@ -7,7 +7,12 @@ import Participant from './participant';
 import styles from './participants.module.css';
 
 export default function Participants() {
-	const { data: participantsData, requestStatus, error } = useRequestRest();
+	const {
+		data: participantsData,
+		requestStatus,
+		error,
+		deleteRecord,
+	} = useRequestRest();
 
 	if (requestStatus === REQUEST_STATUS.FAILURE) {
 		return (
@@ -17,6 +22,10 @@ export default function Participants() {
 		);
 	}
 
+	const delRecord = (participant) => {
+		deleteRecord(participant);
+	};
+
 	return (
 		<>
 			<div className={styles.cardgrid}>
@@ -25,20 +34,19 @@ export default function Participants() {
 					rows={15}
 					ready={requestStatus === REQUEST_STATUS.SUCCESS}
 				>
-					{participantsData.map((x) => {
-						return (
-							<div className={classes.column}>
-							<Participant
-								key={x.id}
-								lastName={x.lastName}
-								firstName={x.firstName}
-								email={x.email}
-								skills={x.skills}
-								picture={x.picture}
-							/>
-							</div>
-						)
-					})}
+					{participantsData && participantsData.length > 0 ? (
+						participantsData.map((x) => {
+							return (
+								<Participant
+									key={x.id}
+									participant={x}
+									deleteRecord={delRecord}
+								/>
+							);
+						})
+					) : (
+						<Alert variant='info'>No participants so far</Alert>
+					)}
 				</ReactPlaceHolder>
 			</div>
 		</>
