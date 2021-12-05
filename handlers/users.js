@@ -44,6 +44,14 @@ export async function getProfile(id) {
 	const data = await client.fetch(
 		`*[_type == "user" && id match '${id}']{lastName, firstName}`
 	);
+
+	if (data === null || !Array.isArray(data) || data.length <= 0) {
+		return {
+			lastName: '',
+			firstName: '',
+		};
+	}
+
 	return {
 		lastName: data[0].lastName,
 		firstName: data[0].firstName,
