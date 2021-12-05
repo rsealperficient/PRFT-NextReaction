@@ -29,6 +29,7 @@ export default function Participant(props) {
 	const cardClass = `${styles.card} ${styles.cardshadow}`;
 	const btnClass = `${styles.btn}`;
 	const imageCss = `${styles.cardimage}`;
+	const iconStyle = { fontSize: '20px' };
 
 	return (
 		<div className={cardClass}>
@@ -36,6 +37,7 @@ export default function Participant(props) {
 				<i
 					className='fa fa-trash'
 					aria-hidden='true'
+					style={iconStyle}
 					onClick={() => handleDelete(_id)}
 				></i>
 			</div>
