@@ -19,9 +19,9 @@ So here are the steps to check out Who's on the Hackathon ? ( 24/7 Customer Supp
 
 ### Step 1 - Clone or Download this Repo. Both the Studio and App are in the same Repo.
 
-### Step 2 - Create a new file with the name "env.local" at the root
+### Step 2 - Create a new file with the name ".env.local" at the root
 
-### Step 3 - Copy the following lines into the "env.local" file.
+### Step 3 - Copy the following lines into the ".env.local" file.
 
 ```bash
 NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyCaV3m9FgGCuk3wiL3YDpEoKXCsrzJPD70
