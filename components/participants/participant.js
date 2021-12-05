@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 //import { Card, Button } from 'react-bootstrap';
 import styles from './participant.module.css';
+import useRequestRest from 'hooks/useRequestRest';
 
 function ImageWithFallback({ src, ...props }) {
 	const [error, setError] = useState(false);
@@ -16,7 +17,13 @@ function ImageWithFallback({ src, ...props }) {
 	return <img src={imgSrc} {...props} onError={onError} />;
 }
 
-export default function Participant({ lastName, firstName, email, skills }) {
+export default function Participant(props) {
+	const { _id, lastName, firstName, email, skills } = props.participant;
+
+	const handleDelete = async () => {
+		props.deleteRecord(props.participant);
+	};
+
 	const name = `${firstName}, ${lastName}`;
 
 	const cardClass = `${styles.card} ${styles.cardshadow}`;
@@ -25,6 +32,13 @@ export default function Participant({ lastName, firstName, email, skills }) {
 
 	return (
 		<div className={cardClass}>
+			<div className={styles.cardicon}>
+				<i
+					className='fa fa-trash'
+					aria-hidden='true'
+					onClick={() => handleDelete(_id)}
+				></i>
+			</div>
 			<div className={styles.cardheader}>{name}</div>
 			{/* <div className={imageCss}>
 				<ImageWithFallback src='1.jpg' />

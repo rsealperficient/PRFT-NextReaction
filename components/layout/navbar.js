@@ -2,6 +2,7 @@ import {
 	Navbar,
 	Nav,
 	Container,
+	NavDropdown,
 	Form,
 	FormControl,
 	Button,
@@ -22,18 +23,18 @@ export default function NavBar() {
 						navbarScroll
 					>
 						<Nav.Link href='/'>Home</Nav.Link>
-						<Nav.Link href='/participants'>Participants</Nav.Link>
+
+						<NavDropdown title='Participants'>
+							<NavDropdown.Item href='/participants'>
+								List
+							</NavDropdown.Item>
+							<NavDropdown.Divider />
+							<NavDropdown.Item href='/participants/add'>
+								Add Participant
+							</NavDropdown.Item>
+						</NavDropdown>
 						<LoginStatus />
 					</Nav>
-					<Form className='d-flex'>
-						<FormControl
-							type='search'
-							placeholder='Search'
-							className='me-2'
-							aria-label='Search'
-						/>
-						<Button variant='outline-success'>Search</Button>
-					</Form>
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>

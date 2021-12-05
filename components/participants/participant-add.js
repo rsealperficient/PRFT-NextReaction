@@ -43,8 +43,8 @@ export default function ParticipantAdd() {
 		axios
 			.post(url, participant)
 			.then((response) => {
-				router.push('/participants');
 				setIsLoading(false);
+				router.push('/participants');
 			})
 			.catch((error) => {
 				setError(error);

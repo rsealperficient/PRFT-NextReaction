@@ -3,6 +3,14 @@
 	--padding: 1rem;
 	border: 1px solid #777;
 	border-radius: 0.25rem;
+	position: relative;
+}
+
+.cardicon {
+	position: relative;
+	top: 0px;
+	right: 0px;
+	display: block;
 }
 
 .card:hover,

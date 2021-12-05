@@ -23,5 +23,10 @@ export default {
 			title: 'Skills',
 			type: 'string',
 		},
+		{
+			name: 'id',
+			title: 'Id',
+			type: 'string',
+		},
 	],
 };
