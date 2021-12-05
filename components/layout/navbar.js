@@ -9,6 +9,7 @@ import {
 } from 'react-bootstrap';
 
 import { LoginStatus } from './login-status';
+import { AddParticipantMenu } from './Add-Participant-Link';
 
 export default function NavBar() {
 	return (
@@ -23,16 +24,7 @@ export default function NavBar() {
 						navbarScroll
 					>
 						<Nav.Link href='/'>Home</Nav.Link>
-
-						<NavDropdown title='Participants'>
-							<NavDropdown.Item href='/participants'>
-								List
-							</NavDropdown.Item>
-							<NavDropdown.Divider />
-							<NavDropdown.Item href='/participants/add'>
-								Add Participant
-							</NavDropdown.Item>
-						</NavDropdown>
+						<AddParticipantMenu/>
 						<LoginStatus />
 					</Nav>
 				</Navbar.Collapse>

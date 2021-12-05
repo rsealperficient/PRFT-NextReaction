@@ -7,7 +7,6 @@ import NavBar from 'components/layout/navbar';
 export default function Home() {
 	return (
 		<>
-			<NavBar />
 			<div className={styles.container}>
 				<Head>
 					<title>Who's at the Hackathon?</title>

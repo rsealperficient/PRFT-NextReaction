@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
 	return (
 		<>
 			<Head>
-				<title>Conferences</title>
+				<title>Who's at the Hachathon?</title>
 				<meta name='description' content='Conferences' />
 				<meta
 					name='viewport'
