@@ -17,11 +17,11 @@ Technologies - Strictly down to Earth [Next.js](https://nextjs.org),
 
 So here are the steps to check out Who's on the Hackathon ? ( 24/7 Customer Support is availabe at 1-555-555-5555)
 
-### Step 1 - Clone or Download this Repo. Both the Studio and App are in the same Repo.
+#### Step 1 - Clone or Download this Repo. Both the Studio and App are in the same Repo.
 
-### Step 2 - Create a new file with the name "env.local" at the root
+#### Step 2 - Create a new file with the name *.env.local* at the root
 
-### Step 3 - Copy the following lines into the "env.local" file.
+#### Step 3 - Copy the following lines into the *.env.local* file.
 
 ```bash
 NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyCaV3m9FgGCuk3wiL3YDpEoKXCsrzJPD70
@@ -37,23 +37,35 @@ NEXT_PUBLIC_SANITY_API_TOKEN=skMEjWU6r7RMkLMsXRL47cZrhLA5LAlLONOR8jmzC9sqTlFYci8
 NEXT_PUBLIC_SANITY_API_VERSION=v1
 ```
 
-### Step 4 - Run the Sanity Studio. Studio will run at `http://localhost:3333`
+#### Step 4 - Run the Sanity Studio. Studio will run at `http://localhost:3333`
 
 ```bash
 npm run start:sanity
 ```
 
-### Step 5 - Install the Application in Development Mode
+#### Step 5 - Install the Application in Development Mode
 
 ```bash
 npm install
 ```
 
-### Step 6 - Show Time! Run the Application. The app will be running at `http://localhost:3000`
+#### Step 6 - Show Time! Run the Application. The app will be running at `http://localhost:3000`
 
 ```bash
 npm run dev
 ```
 
-### Step 7 - Explore!
+#### Step 7 - Explore! :thumbsup:
+
+Must See in action...
+
+1. Authentication - The Whole Shebang, Login, Logoff,Forgot anc Change Password, SignUp
+2. Participants Deck -  Participants in Card Layout
+3. CRUD Operations On Participants
+    1. Add New Participant
+    2. Delete
+    3. Update Details.
+
+
+
 
